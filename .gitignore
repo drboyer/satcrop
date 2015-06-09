@@ -1,7 +1,10 @@
+<<<<<<< HEAD
 # .gitignore - files to exclude from source control
 # Created by https://www.gitignore.io
 
 ### Node ###
+=======
+>>>>>>> 9a901c6af55e166c7ca6821b87f2f9b8adae7ce3
 # Logs
 logs
 *.log
@@ -29,6 +32,7 @@ build/Release
 # Dependency directory
 # https://www.npmjs.org/doc/misc/npm-faq.html#should-i-check-my-node_modules-folder-into-git
 node_modules
+<<<<<<< HEAD
 
 
 ### Bower ###
@@ -37,3 +41,5 @@ bower_components
 .bower-registry
 .bower-tmp
 
+=======
+>>>>>>> 9a901c6af55e166c7ca6821b87f2f9b8adae7ce3
