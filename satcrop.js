@@ -1,8 +1,9 @@
 $(document).ready(function(){
-	var currMoment = moment().utc().subtract(3, 'hours');
+	var currMoment = moment().utc().subtract(1, 'hours');
 	var baseURL = "http://www.ssec.wisc.edu/data/1min/goes-14/";
 	var numImgs = 30;
-	var images = new Array();
+	var imgURLs = new Array();   // the urls to preload
+	var loadedImgs = new Array();    // the preloaded images
 
 	$('#dateblock').html(currMoment.format("MMM Do YY HH:mm UTC"));
 
@@ -20,28 +21,31 @@ $(document).ready(function(){
 
 		imgFilename = "goes14_1_"+filenameTime+".gif";
 		fullURL = baseURL+dateURLFragment+"/"+prevhr+"/"+imgFilename;
-		imgObj = new Image();
-		imgObj.src = fullURL;
-		images.push(imgObj);
+		imgURLs.push(fullURL);
 
 		currMoment.add(1, 'minutes');		
 	}
 
-	//console.log(images);
-
-	// Do some processing on the images - if the height and width is 0, remove it
-	var validImages = new Array();
-	$.each(images, function(i, img) {
-		if(img.height != 0 && img.width != 0) {
-			validImages.push(img);
+	// Preload all the images and start the animation
+	$.Prefetch(imgURLs, { simultaneous: 1,
+		onImageLoaded: function(imgSrc) {
+			loadedImgs.push(imgSrc);
+		},
+		onAllLoaded: function() {
+			doAnimation(loadedImgs);
 		}
 	});
+});
+
+// sets up the image loop
+// TODO: Eventually we should have a way to stop this as well!
+function doAnimation(images) {
 	var i = 0;
 	setInterval(function(){
-		$('#imageblock').html(validImages[i]);
+		$('#imageblock').html('<img src="'+images[i]+'" />');
 		i++;
-		if(i >= validImages.length) {
+		if(i >= images.length) {
 			i = 0;
 		}
 	}, 100);
-});
+}
