@@ -1,0 +1,17 @@
+{
+  "name": "satcrop",
+  "version": "1.0.0",
+  "description": "Viewer for rapid-refresh GOES-14 satellite imagery",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "postinstall": "./node_modules/bower/bin/bower install"
+  },
+  "author": "Devin Boyer",
+  "license": "none",
+  "dependencies": {
+    "bower": "^1.4.1",
+    "connect": "^3.3.5",
+    "serve-static": "^1.9.3"
+  }
+}
