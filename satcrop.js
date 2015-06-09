@@ -27,14 +27,20 @@ $(document).ready(function(){
 		currMoment.add(1, 'minutes');		
 	}
 
-	/*$.each(images, function(i, img) {
-		$('#imageblock').append(img);
-	});*/
+	//console.log(images);
+
+	// Do some processing on the images - if the height and width is 0, remove it
+	var validImages = new Array();
+	$.each(images, function(i, img) {
+		if(img.height != 0 && img.width != 0) {
+			validImages.push(img);
+		}
+	});
 	var i = 0;
 	setInterval(function(){
-		$('#imageblock').html(images[i]);
+		$('#imageblock').html(validImages[i]);
 		i++;
-		if(i >= images.length) {
+		if(i >= validImages.length) {
 			i = 0;
 		}
 	}, 100);
